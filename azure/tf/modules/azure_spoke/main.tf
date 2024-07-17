@@ -110,13 +110,23 @@ resource "azurerm_subnet" "host" {
 
 # Create the privatelink subnet
 resource "azurerm_subnet" "privatelink" {
-  name                                      = "${var.prefix}-privatelink"
-  resource_group_name                       = azurerm_resource_group.this.name
-  virtual_network_name                      = azurerm_virtual_network.this.name
-  private_endpoint_network_policies_enabled = true
+  name                 = "${var.prefix}-privatelink"
+  resource_group_name  = azurerm_resource_group.this.name
+  virtual_network_name = azurerm_virtual_network.this.name
 
   address_prefixes = [local.subnets["privatelink"]]
 }
+
+# Create the privatelink subnet
+# resource "azurerm_subnet" "privatelink" {
+#   name                 = "${var.prefix}-privatelink"
+#   resource_group_name  = azurerm_resource_group.this.name
+#   virtual_network_name = azurerm_virtual_network.this.name
+
+#   address_prefixes = [local.subnets["privatelink"]]
+
+#   enforce_private_link_endpoint_network_policies = true
+# }
 
 # Create a network security rule for AAD
 resource "azurerm_network_security_rule" "aad" {

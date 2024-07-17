@@ -47,6 +47,7 @@ module "hub" {
   test_vm_password        = var.test_vm_password
   client_secret           = var.client_secret
   tags                    = var.tags
+  application_id          = var.application_id 
 }
 
 # Define module "spoke" with a for_each loop to iterate over each spoke configuration
@@ -75,6 +76,6 @@ module "spoke" {
   databricks_app_object_id = var.databricks_app_object_id
   hub_private_link_info    = module.hub.private_link_info
   tenant_id                = module.hub.tenant_id
-
+  
   # depends_on = [module.hub]
 }
